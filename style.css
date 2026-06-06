@@ -1,89 +1,236 @@
-body {
-  font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
-  line-height: 1.6;
+*, *::before, *::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  background-color: #f5f7fb;
-  color: #333;
 }
-
-/* 中央に寄せて読みやすく */
+ 
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Noto+Sans+JP:wght@300;400;700&display=swap');
+ 
+:root {
+  --bg:        #0a0e0a;
+  --bg2:       #0f150f;
+  --surface:   #111811;
+  --border:    #1f3a1f;
+  --green:     #39ff14;
+  --green-dim: #1a7a08;
+  --green-mid: #22c40a;
+  --amber:     #ffb700;
+  --text:      #c8e6c8;
+  --text-dim:  #5a8a5a;
+  --mono:      'Share Tech Mono', monospace;
+  --sans:      'Noto Sans JP', sans-serif;
+}
+ 
+html {
+  scroll-behavior: smooth;
+}
+ 
 body {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 40px 20px;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.8;
+  min-height: 100vh;
+  padding: 0;
+  /* scan-line overlay */
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.18) 2px,
+      rgba(0,0,0,0.18) 4px
+    );
 }
-
-/* タイトル */
+ 
+/* ===== NOISE GRAIN (pseudo-element on body) ===== */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.35;
+}
+ 
+/* ===== WRAPPER ===== */
+body > * {
+  max-width: 860px;
+  margin-left: auto;
+  margin-right: auto;
+}
+ 
+/* ===== H1 — ハンドルネーム (big hero) ===== */
 h1 {
-  font-size: 2.2rem;
-  text-align: center;
-  margin-bottom: 10px;
-  color: #1f3a93;
+  font-family: var(--mono);
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  color: var(--green);
+  text-shadow:
+    0 0 8px var(--green),
+    0 0 30px var(--green-dim);
+  letter-spacing: 0.12em;
+  padding: 3.5rem 2rem 0.5rem;
+  border-bottom: 2px solid var(--green-dim);
+  position: relative;
 }
-
-/* 見出し */
-h2, h3 {
-  margin-top: 40px;
-  border-left: 6px solid #1f3a93;
-  padding-left: 10px;
-  color: #1f3a93;
+ 
+/* blinking cursor after h1 */
+h1::after {
+  content: '_';
+  animation: blink 1.1s step-end infinite;
+  color: var(--green);
 }
-
-/* 段落 */
+ 
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+ 
+/* ===== H2 — section title ===== */
+h2 {
+  font-family: var(--mono);
+  font-size: 1.05rem;
+  color: var(--amber);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin: 3rem 2rem 1rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--border);
+}
+ 
+h2::before {
+  content: '## ';
+  color: var(--green-dim);
+}
+ 
+/* ===== H3 — subsection ===== */
+h3 {
+  font-family: var(--mono);
+  font-size: 0.88rem;
+  color: var(--green-mid);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin: 2.2rem 2rem 0.8rem;
+}
+ 
+h3::before {
+  content: '> ';
+  color: var(--text-dim);
+}
+ 
+/* ===== PARAGRAPH ===== */
 p {
-  background: #ffffff;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  margin: 0 2rem 1rem;
+  color: var(--text);
+  font-size: 0.95rem;
+  max-width: 640px;
 }
-
-/* リスト */
+ 
+/* ===== LISTS ===== */
 ul {
-  background: #ffffff;
-  padding: 15px 25px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  list-style: none;
+  margin: 0 2rem 1.2rem;
+  padding: 0;
 }
-
-/* リストの余白 */
-li {
-  margin-bottom: 6px;
+ 
+ul li {
+  padding: 0.25rem 0 0.25rem 1.4rem;
+  position: relative;
+  font-size: 0.93rem;
+  color: var(--text);
+  border-bottom: 1px dashed var(--border);
 }
-
-/* テーブル */
+ 
+ul li:last-child { border-bottom: none; }
+ 
+ul li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--green);
+  font-size: 0.75rem;
+  top: 0.45rem;
+}
+ 
+/* ===== TABLE ===== */
 table {
-  width: 100%;
+  width: calc(100% - 4rem);
+  margin: 0 2rem 1.5rem;
   border-collapse: collapse;
-  background: #fff;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-  margin-top: 10px;
+  font-size: 0.9rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 0 20px rgba(57,255,20,0.05);
 }
-
+ 
 th, td {
-  padding: 12px;
-  border-bottom: 1px solid #eee;
+  padding: 0.65rem 1rem;
   text-align: left;
+  vertical-align: top;
+  border: 1px solid var(--border);
 }
-
+ 
 th {
-  background-color: #f0f4ff;
-  width: 30%;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--green);
+  background: #0c130c;
+  white-space: nowrap;
+  letter-spacing: 0.06em;
+  width: 200px;
 }
-
-/* リンク */
+ 
+td {
+  color: var(--text);
+}
+ 
+tr:hover td {
+  background: rgba(57,255,20,0.04);
+  transition: background 0.2s;
+}
+ 
+/* ===== LINKS ===== */
 a {
-  color: #1f3a93;
+  color: var(--green);
   text-decoration: none;
+  font-family: var(--mono);
+  font-size: 0.88rem;
+  border-bottom: 1px solid var(--green-dim);
+  transition: color 0.2s, border-color 0.2s, text-shadow 0.2s;
 }
-
+ 
 a:hover {
-  text-decoration: underline;
+  color: #fff;
+  border-color: var(--green);
+  text-shadow: 0 0 8px var(--green);
 }
-
-/* フッターっぽい余白 */
-ul:last-of-type {
-  margin-bottom: 60px;
+ 
+/* ===== FOOTER PADDING ===== */
+body {
+  padding-bottom: 4rem;
+}
+ 
+/* ===== ENTRANCE ANIMATION ===== */
+h1, h2, h3, p, ul, table {
+  animation: fadeUp 0.5s ease both;
+}
+ 
+h1 { animation-delay: 0.05s; }
+h2 { animation-delay: 0.1s; }
+h3 { animation-delay: 0.15s; }
+p, ul, table { animation-delay: 0.2s; }
+ 
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+ 
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+  h1 { font-size: 1.8rem; padding: 2rem 1rem 0.4rem; }
+  h2, h3, p, ul { margin-left: 1rem; margin-right: 1rem; }
+  table { width: calc(100% - 2rem); margin-left: 1rem; margin-right: 1rem; }
+  th { width: 120px; font-size: 0.72rem; }
 }
