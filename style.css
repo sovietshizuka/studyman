@@ -89,10 +89,3 @@ a {
 a:hover {
   color: #000;
 }
-
-@media (max-width: 600px) {
-  body { padding: 2rem 1rem; }
-  h1   { font-size: 1.5rem; }
-  th   { width: 40%; font-size: 0.88rem; }
-  td   { font-size: 0.88rem; }
-}
