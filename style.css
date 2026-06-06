@@ -1,3 +1,4 @@
+* ===== BASE ===== */
 body {
   font-family: "Noto Sans JP", "Hiragino Sans", "Meiryo", sans-serif;
   font-size: 16px;
@@ -66,10 +67,3 @@ th {
 
 /* ===== LINKS ===== */
 a {
-  color: #0066cc;
-  text-decoration: underline;
-}
-
-a:hover {
-  color: #004499;
-}
