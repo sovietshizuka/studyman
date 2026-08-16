@@ -1,76 +1,22 @@
 <!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <link href="style.css" rel="stylesheet">
-    <title>玉井雄大のポートフォリオ</title>
-  </head>
-  <body>
-    <h1>ポートフォリオ</h1>
-    
-    <h2>About</h2>
-    <p>
-      ZEN大学の1年生<br>
-      将来の夢は、ハッカーになること、そして脆弱性を見つけられる人間になること
-    </p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>今日の運勢</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-    <h3>Profile</h3>
-    <ul>
-      <li>名前　玉井雄大</li>
-      <li>所在地　茨城県那珂市</li>
-      <li>得意領域　栽培</li>
-    </ul>
+    <div class="container">
+        <h1>🔮 今日の運勢</h1>
+        <p>ボタンを押して今日の運勢を占おう！</p>
 
-    <h3>Skills</h3>
-    <table>
-      <tr>
-        <th>OS</th>
-        <td>最近中古のノートパソコンを購入し、Ubuntuを入れた</td>
-      </tr>
-      <tr>
-        <th>Engine, Frameworks</th>
-        <td>Unity</td>
-      </tr>
-      <tr>
-        <th>Tool, MiddleWare</th>
-        <td>なし</td>
-      </tr>
-      <tr>
-        <th>資格・免許</th>
-        <td>資格？ありません無敵です</td>
-      </tr>
-    </table>
+        <button onclick="fortune()">占う</button>
 
-    <h3>Works</h3>
-    <p>アピールできる内容なし</p>
-    <ul>
-     
-    </ul>
+        <div id="result">ここに結果が表示されます</div>
+    </div>
 
-    <h3>Contact</h3>
-    <ul>
-      <li><a href="261zs00435@student.zen.ac.jp">学校のGmail</a></li>
-      <li> Twitterはやったことなし</li>
-    </ul>
-
-    <h3>History</h3>
-    <p>学歴、職歴、アルバイト、インターン経験など。</p>
-    <table>
-      <tr>
-        <th>2026 年</th>
-        <td>茨城県立緑岡高校を卒業</td>
-      </tr>
-      <tr>
-        <th>2026 年</th>
-        <td>ZEN大学入学</td>
-      </tr>
-      <tr>
-        <th>2026 年</th>
-        <td>ローソンでバイトを始め、タバコを番号で言わない客に殺意を覚える。アルミホイルを頭に巻いてきた客が来たときは命の危険を感じた。</td>
-      </tr>
-      
-    </table>
-  </body>
+    <script src="script.js"></script>
+</body>
 </html>
